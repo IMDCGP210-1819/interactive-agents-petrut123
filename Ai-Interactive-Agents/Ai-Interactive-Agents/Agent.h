@@ -1,28 +1,34 @@
 #pragma once
+#include <iostream>
+#include <random>
 #include "SFML/Graphics.hpp"
-class Agent : public sf::Drawable
+#include "Map.h"
+
+class Agent
 {
 public:
 	enum States
 	{
 		Idle,
 		Move,
-		CheckIn,
 		RunState,
 		BenchState,
-		ElectricBikeState
+		ElectricBikeState,
+		ChooseTrainingState
 	};
-	sf::Transformable *transform = new sf::Transformable();
-	States currentState = Idle;
-	void MoveTo(sf::Vector3f targetPosition);
-	void CheckInState();
-	void RunState();
-	void BenchState();
-	void ElectricBikeState();
-	Agent();
+
+	States currentState;
+	void MoveTo(Node start, States nextState);
+	void RunStateControl();
+	void BenchStateControl();
+	void ElectricBikeStateControl();
+	void ChooseTraining();
+	sf::Sprite m_sprite;
+	int RandomNumberInRange(int max, int min);
+	Agent(sf::Sprite sprite, Map* map);
 	~Agent();
+	Map* mapReference;
 
 private:
-	sf::Sprite m_sprite;
 };
 
