@@ -1,14 +1,14 @@
 #pragma once
+#include <iostream>
 #include "Node.h"
-#include <list>
 
 class Map
 {
 public:
 	Map(int tilesAlong, int tilesAcross);
 	~Map();
-	Node* nodes;
-	Node FindNeighbors(int x, int y);
+	std::vector<Node> nodes;
+	void FindNeighbors(int x, int y, Node* node, int width, int height);
 	int width;
 	int height;
 };

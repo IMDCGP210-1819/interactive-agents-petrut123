@@ -3,6 +3,8 @@
 #include <random>
 #include "SFML/Graphics.hpp"
 #include "Map.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 class Agent
 {
@@ -18,7 +20,7 @@ public:
 	};
 
 	States currentState;
-	void MoveTo(Node start, States nextState);
+	void MoveTo(Node start, Node end, States nextState);
 	void RunStateControl();
 	void BenchStateControl();
 	void ElectricBikeStateControl();
@@ -28,6 +30,8 @@ public:
 	Agent(sf::Sprite sprite, Map* map);
 	~Agent();
 	Map* mapReference;
+	void SeekFleeBehaviour(sf::Vector2i destination, bool seek);
+	sf::Vector2f velocity = sf::Vector2f(0, 0);
 
 private:
 };

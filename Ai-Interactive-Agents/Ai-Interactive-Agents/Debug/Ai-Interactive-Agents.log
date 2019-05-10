@@ -1,22 +1,13 @@
 ﻿  Agent.cpp
-e:\ai-interactive\interactive-agents-petrut123\ai-interactive-agents\ai-interactive-agents\agent.cpp(68): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Ai-Interactive-Agents.cpp
-e:\ai-interactive\interactive-agents-petrut123\ai-interactive-agents\ai-interactive-agents\ai-interactive-agents.cpp(52): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+e:\ai-interactive\interactive-agents-petrut123\ai-interactive-agents\ai-interactive-agents\agent.cpp(39): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-e:\ai-interactive\interactive-agents-petrut123\ai-interactive-agents\ai-interactive-agents\ai-interactive-agents.cpp(53): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+e:\ai-interactive\interactive-agents-petrut123\ai-interactive-agents\ai-interactive-agents\agent.cpp(43): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-e:\ai-interactive\interactive-agents-petrut123\ai-interactive-agents\ai-interactive-agents\ai-interactive-agents.cpp(54): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-  Map.cpp
-  Node.cpp
-  Generating Code...
+e:\ai-interactive\interactive-agents-petrut123\ai-interactive-agents\ai-interactive-agents\agent.cpp(77): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Ai-Interactive-Agents.vcxproj -> E:\AI-Interactive\interactive-agents-petrut123\Ai-Interactive-Agents\Debug\Ai-Interactive-Agents.exe
