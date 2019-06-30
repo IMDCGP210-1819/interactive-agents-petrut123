@@ -18,5 +18,12 @@ public:
 	//Position in grid
 	int x, y;
 	std::vector<Node*>* neighbors;
+
+	//const inline bool operator==(const Node& other) const {
+	//	return (x == other.x and y == other.y);
+	//}
+	////bool operator==(const Node &other) { return ((x == other->x) && (y == other->y)); }
+	//inline bool operator==(const Node other) { return (x == other.x) && (y == other.y); }
+	//inline bool operator==(const Node* other) { return (this->x == other->x) && (this->y == other->y); }
 };
 

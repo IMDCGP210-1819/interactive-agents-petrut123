@@ -1,13 +1,32 @@
-﻿  Agent.cpp
-e:\ai-interactive\interactive-agents-petrut123\ai-interactive-agents\ai-interactive-agents\agent.cpp(39): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-e:\ai-interactive\interactive-agents-petrut123\ai-interactive-agents\ai-interactive-agents\agent.cpp(43): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-e:\ai-interactive\interactive-agents-petrut123\ai-interactive-agents\ai-interactive-agents\agent.cpp(77): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Ai-Interactive-Agents.vcxproj -> E:\AI-Interactive\interactive-agents-petrut123\Ai-Interactive-Agents\Debug\Ai-Interactive-Agents.exe
+﻿  Ai-Interactive-Agents.cpp
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(48,124): warning C4244:  'argument': conversion from 'int' to 'T', possible loss of data
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(48,124): warning C4244:         with
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(48,124): warning C4244:         [
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(48,124): warning C4244:             T=float
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(48,124): warning C4244:         ]
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(48,80): warning C4244:  'argument': conversion from 'int' to 'T', possible loss of data
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(48,80): warning C4244:         with
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(48,80): warning C4244:         [
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(48,80): warning C4244:             T=float
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(48,80): warning C4244:         ]
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(49,125): warning C4244:  'argument': conversion from 'int' to 'T', possible loss of data
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(49,125): warning C4244:         with
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(49,125): warning C4244:         [
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(49,125): warning C4244:             T=float
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(49,125): warning C4244:         ]
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(49,80): warning C4244:  'argument': conversion from 'int' to 'T', possible loss of data
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(49,80): warning C4244:         with
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(49,80): warning C4244:         [
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(49,80): warning C4244:             T=float
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(49,80): warning C4244:         ]
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(50,132): warning C4244:  'argument': conversion from 'int' to 'T', possible loss of data
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(50,132): warning C4244:         with
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(50,132): warning C4244:         [
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(50,132): warning C4244:             T=float
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(50,132): warning C4244:         ]
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(50,86): warning C4244:  'argument': conversion from 'int' to 'T', possible loss of data
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(50,86): warning C4244:         with
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(50,86): warning C4244:         [
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(50,86): warning C4244:             T=float
+C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(50,86): warning C4244:         ]
+  Ai-Interactive-Agents.vcxproj -> C:\DELETE\interactive-agents-petrut123\Ai-Interactive-Agents\Debug\Ai-Interactive-Agents.exe

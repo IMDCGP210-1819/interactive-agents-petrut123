@@ -19,8 +19,8 @@ Map::Map(int xDimension, int yDimension)
 			nodes[index].y = j * MAP_NODE_DIMENSION_Y;
 			//nodes[index].neighbors = *FindNeighbors(i, j);
 			FindNeighbors(i, j, &nodes[index], width, height);
-			std::cout << i << " ";
-			std::cout << j << std::endl;
+			//std::cout << i << " ";
+			//std::cout << j << std::endl;
 			index++;
 		}
 	}

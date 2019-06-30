@@ -11,19 +11,23 @@ void Agent::MoveTo(Node start, Node end, States nextState)
 	}
 
 	std::list<Node*> nodeQueue;
+	std::list<Node*> path;
 	nodeQueue.push_back(&start);
-
+	std::cout << end.x << " ";
+	std::cout << end.y << std::endl;
+	
 	while (!nodeQueue.empty())
 	{
 		//Get the index of the first node
 		int a = (nodeQueue.front()->x / MAP_NODE_DIMENSION_X) * mapReference->height + (nodeQueue.front()->y / MAP_NODE_DIMENSION_Y);
 		nodeQueue.front()->isVisited = true;
+		path.push_back(nodeQueue.front());
 
-		if (nodeQueue.front() == &end)
+		if (nodeQueue.front()->x == end.x && nodeQueue.front()->y == end.y)
 		{
 			break;
 		}
-
+		
 		nodeQueue.pop_front();
 
 		for (size_t i = 0; i < mapReference->nodes[a].neighbors->size(); ++i)
@@ -33,18 +37,41 @@ void Agent::MoveTo(Node start, Node end, States nextState)
 			if (!vectorRef[i]->isVisited && !vectorRef[i]->isObstacle)
 			{
 				vectorRef[i]->isVisited = true;
-				if (vectorRef[i] == &end)
+				if (vectorRef[i]->x == end.x && vectorRef[i]->y == end.y)
 				{
 					nodeQueue.push_front(vectorRef[i]);
-					this->m_sprite.setPosition(sf::Vector2f(vectorRef[i]->x, vectorRef[i]->y));
 					break;
 				}
 				nodeQueue.push_back(vectorRef[i]);
-				this->m_sprite.setPosition(sf::Vector2f(vectorRef[i]->x, vectorRef[i]->y));
-				std::cout << this->m_sprite.getPosition().x << " ";
-				std::cout << this->m_sprite.getPosition().y << std::endl;
 			}
 		}
+	}
+	path.pop_front();
+	//TODO return a path from this function and use the path in a for loop  to move the agent between draw calls so the user can actually see the movement
+	size_t size = path.size();
+	float t = 0.0f;
+	float currentLerpTime = 0.0f;
+	float lerpTime = 1.0f;
+	sf::Clock clock;
+
+	for (size_t i = 0; i < size; i++)
+	{
+		std::cout << path.front()->x << " ";
+		std::cout << path.front()->y << std::endl;
+		while (t < 1.0f)
+		{
+			currentLerpTime += clock.restart().asSeconds();
+			if (currentLerpTime > lerpTime)
+				currentLerpTime = lerpTime;
+
+			t = currentLerpTime / lerpTime;
+			//t = t * t;
+			this->m_sprite.setPosition(lerp(this->m_sprite.getPosition(), sf::Vector2f(path.front()->x, path.front()->y), t));
+		}
+		t = 0.0f;
+		currentLerpTime = 0.0f;
+		//this->m_sprite.setPosition(sf::Vector2f(path.front()->x, path.front()->y));
+		path.pop_front();
 	}
 }
 
@@ -80,7 +107,7 @@ void Agent::SeekFleeBehaviour(sf::Vector2i destination, bool seek)
 	velocity *= maxSpeed;
 
 	float angle = atan2(velocity.y, velocity.x);
-	this->m_sprite.setRotation(angle * 180.0f / M_PI);
+	this->m_sprite.setRotation(angle * 180.0 / M_PI);
 
 	this->m_sprite.move(velocity);
 
@@ -103,6 +130,11 @@ void Agent::SeekFleeBehaviour(sf::Vector2i destination, bool seek)
 	}
 }
 
+sf::Vector2f Agent::lerp(sf::Vector2f start, sf::Vector2f end, float t)
+{
+	return (1 - t) * start + t * end;
+}
+
 void Agent::RunStateControl()
 {
 }
@@ -120,7 +152,7 @@ void Agent::ChooseTraining()
 	currentState = ChooseTrainingState;
 	//Randomly choose the next training
 	States nextState = (States)RandomNumberInRange(4, 2);
-	MoveTo(mapReference->nodes[0], mapReference->nodes[7 * mapReference->height + 5], ChooseTrainingState);
+	//MoveTo(mapReference->nodes[0], mapReference->nodes[7 * mapReference->width + 5], ChooseTrainingState);
 	if (nextState == RunState)
 	{
 		//MoveTo();
