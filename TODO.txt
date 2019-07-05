@@ -1,0 +1,7 @@
+Create code architecture on paper or make a diagram to show the code structure.
+
+Implement a gym trainer that will use steering behaviours to wander around the gym.
+
+If there is enough time look into A* or Dijkstra algorithm to improve pathfinding.
+
+Refactor the Agent class after I decided on the code structure. 

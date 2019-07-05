@@ -2,77 +2,25 @@
 #include "Agent.h"
 
 
-void Agent::MoveTo(Node start, Node end, States nextState)
+void Agent::MoveTo()
 {
-	//Pathfinding
-	for (int i = 0; i < mapReference->width * mapReference->height; i++)
+	Node* currentPath = path.front();
+
+	sf::Vector2f diff = sf::Vector2f(currentPath->x - this->m_sprite.getPosition().x, currentPath->y - this->m_sprite.getPosition().y);
+
+	float dist = abs(sqrt(diff.x * diff.x + diff.y * diff.y));
+
+	if (dist > 1.f) 
 	{
-		mapReference->nodes[i].isVisited = false;
+		diff.x = diff.x / dist;
+		diff.y = diff.y / dist;
+
+		this->m_sprite.move(diff * 1.5f);
 	}
-
-	std::list<Node*> nodeQueue;
-	std::list<Node*> path;
-	nodeQueue.push_back(&start);
-	std::cout << end.x << " ";
-	std::cout << end.y << std::endl;
-	
-	while (!nodeQueue.empty())
-	{
-		//Get the index of the first node
-		int a = (nodeQueue.front()->x / MAP_NODE_DIMENSION_X) * mapReference->height + (nodeQueue.front()->y / MAP_NODE_DIMENSION_Y);
-		nodeQueue.front()->isVisited = true;
-		path.push_back(nodeQueue.front());
-
-		if (nodeQueue.front()->x == end.x && nodeQueue.front()->y == end.y)
-		{
-			break;
-		}
-		
-		nodeQueue.pop_front();
-
-		for (size_t i = 0; i < mapReference->nodes[a].neighbors->size(); ++i)
-		{
-			std::vector<Node*>& vectorRef = *mapReference->nodes[a].neighbors;
-
-			if (!vectorRef[i]->isVisited && !vectorRef[i]->isObstacle)
-			{
-				vectorRef[i]->isVisited = true;
-				if (vectorRef[i]->x == end.x && vectorRef[i]->y == end.y)
-				{
-					nodeQueue.push_front(vectorRef[i]);
-					break;
-				}
-				nodeQueue.push_back(vectorRef[i]);
-			}
-		}
-	}
-	path.pop_front();
-	//TODO return a path from this function and use the path in a for loop  to move the agent between draw calls so the user can actually see the movement
-	size_t size = path.size();
-	float t = 0.0f;
-	float currentLerpTime = 0.0f;
-	float lerpTime = 1.0f;
-	sf::Clock clock;
-
-	for (size_t i = 0; i < size; i++)
-	{
-		std::cout << path.front()->x << " ";
-		std::cout << path.front()->y << std::endl;
-		while (t < 1.0f)
-		{
-			currentLerpTime += clock.restart().asSeconds();
-			if (currentLerpTime > lerpTime)
-				currentLerpTime = lerpTime;
-
-			t = currentLerpTime / lerpTime;
-			//t = t * t;
-			this->m_sprite.setPosition(lerp(this->m_sprite.getPosition(), sf::Vector2f(path.front()->x, path.front()->y), t));
-		}
-		t = 0.0f;
-		currentLerpTime = 0.0f;
-		//this->m_sprite.setPosition(sf::Vector2f(path.front()->x, path.front()->y));
+	else {
 		path.pop_front();
 	}
+	
 }
 
 void Agent::SeekFleeBehaviour(sf::Vector2i destination, bool seek)
@@ -152,10 +100,68 @@ void Agent::ChooseTraining()
 	currentState = ChooseTrainingState;
 	//Randomly choose the next training
 	States nextState = (States)RandomNumberInRange(4, 2);
-	//MoveTo(mapReference->nodes[0], mapReference->nodes[7 * mapReference->width + 5], ChooseTrainingState);
-	if (nextState == RunState)
+
+	// Create a function that will return the position of an object in grid space to get the nodes for generating a path
+	path = this->GeneratePath(mapReference->nodes[0], mapReference->nodes[7 * mapReference->width + 5]);
+}
+
+std::list<Node*> Agent::GeneratePath(Node start, Node end)
+{
+	//Pathfinding
+	for (int i = 0; i < mapReference->width * mapReference->height; i++)
 	{
-		//MoveTo();
+		mapReference->nodes[i].isVisited = false;
+	}
+
+	std::list<Node*> nodeQueue;
+	std::list<Node*> path;
+	nodeQueue.push_back(&start);
+
+	while (!nodeQueue.empty())
+	{
+		//Get the index of the first node
+		int a = (nodeQueue.front()->x / MAP_NODE_DIMENSION_X) * mapReference->height + (nodeQueue.front()->y / MAP_NODE_DIMENSION_Y);
+		nodeQueue.front()->isVisited = true;
+		path.push_back(nodeQueue.front());
+
+		if (nodeQueue.front()->x == end.x && nodeQueue.front()->y == end.y)
+		{
+			break;
+		}
+
+		nodeQueue.pop_front();
+
+		for (size_t i = 0; i < mapReference->nodes[a].neighbors->size(); ++i)
+		{
+			std::vector<Node*>& vectorRef = *mapReference->nodes[a].neighbors;
+
+			if (!vectorRef[i]->isVisited && !vectorRef[i]->isObstacle)
+			{
+				vectorRef[i]->isVisited = true;
+				if (vectorRef[i]->x == end.x && vectorRef[i]->y == end.y)
+				{
+					nodeQueue.push_front(vectorRef[i]);
+					break;
+				}
+				nodeQueue.push_back(vectorRef[i]);
+			}
+		}
+	}
+	path.pop_front();
+	return path;
+}
+
+void Agent::Update()
+{
+	// Choose a state
+	if (path.size() == 0)
+	{
+		ChooseTraining();
+	}
+	else
+	{
+		// We've got a path so we should move along it
+		MoveTo();
 	}
 }
 
@@ -170,8 +176,6 @@ Agent::Agent(sf::Sprite sprite, Map* map)
 	this->mapReference = map;
 	//Go into idle state;
 	currentState = Idle;
-	//Start interacting
-	ChooseTraining();
 }
 
 Agent::~Agent()
