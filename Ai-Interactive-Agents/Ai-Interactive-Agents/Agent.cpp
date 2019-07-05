@@ -23,6 +23,8 @@ void Agent::MoveTo()
 	
 }
 
+
+
 void Agent::SeekFleeBehaviour(sf::Vector2i destination, bool seek)
 {
 	//Pass true for seek and false for flee behaviour
@@ -97,12 +99,14 @@ void Agent::ElectricBikeStateControl()
 
 void Agent::ChooseTraining()
 {
+	std::cout << "Choose training state" << std::endl;
 	currentState = ChooseTrainingState;
 	//Randomly choose the next training
 	States nextState = (States)RandomNumberInRange(4, 2);
 
 	// Create a function that will return the position of an object in grid space to get the nodes for generating a path
 	path = this->GeneratePath(mapReference->nodes[0], mapReference->nodes[7 * mapReference->width + 5]);
+	std::cout << "Training chosen" << std::endl;
 }
 
 std::list<Node*> Agent::GeneratePath(Node start, Node end)
@@ -151,18 +155,11 @@ std::list<Node*> Agent::GeneratePath(Node start, Node end)
 	return path;
 }
 
-void Agent::Update()
+void Agent::RestingState()
 {
-	// Choose a state
-	if (path.size() == 0)
-	{
-		ChooseTraining();
-	}
-	else
-	{
-		// We've got a path so we should move along it
-		MoveTo();
-	}
+	std::cout << "Entering resting state!" << std::endl;
+	this->energy++;
+	std::cout << "Restoring energy..." << std::endl;
 }
 
 int Agent::RandomNumberInRange(int max, int min)
@@ -170,12 +167,37 @@ int Agent::RandomNumberInRange(int max, int min)
 	srand(time(0));
 	return rand() % (max + 1 - min) + min;
 }
+
+void Agent::Update()
+{
+	// Do I have enough energy?
+	if (energy >= 25)
+		ChooseTraining();
+	else
+	{
+		this->currentState = Resting;
+		RestingState();
+	}
+	// Test Code
+
+	//// Choose a state
+	//if (path.size() == 0)
+	//{
+	//	ChooseTraining();
+	//}
+	//else
+	//{
+	//	// We've got a path so we should move along it
+	//	MoveTo();
+	//}
+}
+
 Agent::Agent(sf::Sprite sprite, Map* map)
 {
 	this->m_sprite = sprite;
 	this->mapReference = map;
-	//Go into idle state;
-	currentState = Idle;
+	//Go into default state
+	this->currentState = Default;
 }
 
 Agent::~Agent()
