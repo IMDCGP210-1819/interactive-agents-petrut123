@@ -45,5 +45,6 @@ private:
 	std::list<Node*> GeneratePath(Node start, Node end);
 	int RandomNumberInRange(int max, int min);
 	sf::Vector2f lerp(sf::Vector2f start, sf::Vector2f end, float t);
+	void Delay(float delayTimeInSeconds);
 };
 

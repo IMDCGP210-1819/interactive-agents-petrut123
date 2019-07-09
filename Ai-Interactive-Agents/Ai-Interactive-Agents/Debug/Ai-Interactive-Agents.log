@@ -1,3 +1,4 @@
 ﻿  Agent.cpp
 E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Agent.cpp(58,43): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Agent.cpp(281,12): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Ai-Interactive-Agents.vcxproj -> E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Debug\Ai-Interactive-Agents.exe

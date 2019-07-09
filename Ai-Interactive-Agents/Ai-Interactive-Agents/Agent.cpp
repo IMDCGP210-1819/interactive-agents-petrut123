@@ -83,6 +83,14 @@ sf::Vector2f Agent::lerp(sf::Vector2f start, sf::Vector2f end, float t)
 	return (1 - t) * start + t * end;
 }
 
+void Agent::Delay(float delayTimeInSeconds)
+{
+	sf::Clock clock;
+	sf::Time time = clock.getElapsedTime();
+	while (time.asSeconds() < delayTimeInSeconds)
+		time += clock.restart();
+}
+
 void Agent::RunStateControl()
 {
 	std::cout << "Entering run state" << std::endl;
@@ -98,6 +106,7 @@ void Agent::RunStateControl()
 			this->currentState = Default;
 			return;
 		}
+		//Delay(0.1f);
 	}
 	this->currentState = Default;
 	std::cout << "Training done!" << std::endl;
@@ -118,6 +127,7 @@ void Agent::BenchStateControl()
 			this->currentState = Default;
 			return;
 		}
+		//Delay(0.1f);
 	}
 	this->currentState = Default;
 	std::cout << "Training done. I feel stronger already!" << std::endl;
@@ -137,6 +147,7 @@ void Agent::ElectricBikeStateControl()
 			this->currentState = Default;
 			return;
 		}
+		//Delay(0.1f);
 	}
 	this->currentState = Default;
 	std::cout << "Training done" << std::endl;
@@ -155,7 +166,7 @@ void Agent::ChooseTraining()
 	else if (this->nextState == BenchState)
 		positionToCompare = mapReference->benchSprite->getPosition();
 	else if (this->nextState == ElectricBikeState)
-		positionToCompare == mapReference->bikeSprite->getPosition();
+		positionToCompare = mapReference->bikeSprite->getPosition();
 	else
 		// Error handling
 		std::cout << "ERROR: You got an invalid state from the radom number generator please restart!" << std::endl;
@@ -201,22 +212,7 @@ std::list<Node*> Agent::GeneratePath(Node start, Node end)
 		}
 
 		nodeQueue.pop_front();
-
-		for (size_t i = 0; i < mapReference->nodes[a].neighbors->size(); ++i)
-		{
-			std::vector<Node*>& vectorRef = *mapReference->nodes[a].neighbors;
-
-			if (!vectorRef[i]->isVisited && !vectorRef[i]->isObstacle)
-			{
-				vectorRef[i]->isVisited = true;
-				if (vectorRef[i]->x == end.x && vectorRef[i]->y == end.y)
-				{
-					nodeQueue.push_front(vectorRef[i]);
-					break;
-				}
-				nodeQueue.push_back(vectorRef[i]);
-			}
-		}
+		nodeQueue.push_back(mapReference->nodes[a].GetClosestNeighborToDestination(&end));
 	}
 	path.pop_front();
 	return path;
@@ -225,26 +221,25 @@ std::list<Node*> Agent::GeneratePath(Node start, Node end)
 void Agent::RestingState()
 {
 	std::cout << "Entering resting state!" << std::endl;
-	this->energy += 5;
+	this->energy += RandomNumberInRange(15, 5);
 	this->currentState = Default;
 	std::cout << "Restoring energy..." << std::endl;
 }
 
 int Agent::RandomNumberInRange(int max, int min)
 {
-	srand(clock());
 	return rand() % (max + 1 - min) + min;
 }
 
 void Agent::Update()
 {
-	switch (currentState)
+	switch (this->currentState)
 	{
 		case Agent::Default:
 		{
 			// Do I have enough energy?
-			if (energy >= 25)
-				currentState = ChooseTrainingState;
+			if (this->energy >= 75)
+				this->currentState = ChooseTrainingState;
 			else
 				this->currentState = Resting;
 		}
@@ -283,6 +278,7 @@ void Agent::Update()
 
 Agent::Agent(sf::Sprite sprite, Map* map)
 {
+	srand(time(0));
 	this->m_sprite = sprite;
 	this->mapReference = map;
 	//Go into default state

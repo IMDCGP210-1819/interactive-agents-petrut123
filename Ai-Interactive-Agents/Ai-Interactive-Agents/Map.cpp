@@ -29,110 +29,107 @@ void Map::FindNeighbors(int x, int y, Node* node, int width, int height)
 	//We check if the node is placed at the edge of the map since that changes its neighbors
 	if (x == 0 && y == 0)
 	{
-		node->neighbors = new std::vector<Node*>[3];
-		//node->neighbors->resize();
-		node->neighbors->push_back(&nodes[1]);
-		node->neighbors->push_back(&nodes[(height)]);
-		node->neighbors->push_back(&nodes[(height)+1]);
+		//node->neighbors[3];
+		//node->neighbors.resize(3);
+		node->neighbors.push_back(&nodes[1]);
+		node->neighbors.push_back(&nodes[(height)]);
+		node->neighbors.push_back(&nodes[(height)+1]);
 	}
 	else if (x == 0 && y != 0)
 	{
 		if (y == height - 1)
 		{
-			node->neighbors = new std::vector<Node*>[3];
-			//node->neighbors->resize(3);
-			node->neighbors->push_back(&nodes[y - 1]);
-			node->neighbors->push_back(&nodes[height + y - 1]);
-			node->neighbors->push_back(&nodes[height + y]);
+			//node->neighbors[3];
+		    //node->neighbors.resize(3);
+			node->neighbors.push_back(&nodes[y - 1]);
+			node->neighbors.push_back(&nodes[height + y - 1]);
+			node->neighbors.push_back(&nodes[height + y]);
 		}
 		else
 		{
-			node->neighbors = new std::vector<Node*>[5];
-			//node->neighbors->resize(5);
-			node->neighbors->push_back(&nodes[y - 1]);
-			node->neighbors->push_back(&nodes[height + y - 1]);
-			node->neighbors->push_back(&nodes[height + y]);
-			node->neighbors->push_back(&nodes[y + 1]);
-			node->neighbors->push_back(&nodes[height + y + 1]);
+			//node->neighbors[5];
+			//node->neighbors.resize(5);
+			node->neighbors.push_back(&nodes[y - 1]);
+			node->neighbors.push_back(&nodes[height + y - 1]);
+			node->neighbors.push_back(&nodes[height + y]);
+			node->neighbors.push_back(&nodes[y + 1]);
+			node->neighbors.push_back(&nodes[height + y + 1]);
 		}
 	}
 	else if (x != 0 && y == 0)
 	{
 		if (x == width - 1)
 		{
-			node->neighbors = new std::vector<Node*>[3];
-			//node->neighbors->resize(3);
-			node->neighbors->push_back(&nodes[(x - 1) * height]);
-			node->neighbors->push_back(&nodes[(x - 1) * height + 1]);
-			node->neighbors->push_back(&nodes[x * height + 1]);
+			//node->neighbors[3];
+			//node->neighbors.resize(3);
+			node->neighbors.push_back(&nodes[(x - 1) * height]);
+			node->neighbors.push_back(&nodes[(x - 1) * height + 1]);
+			node->neighbors.push_back(&nodes[x * height + 1]);
 		}
 		else
 		{
-			node->neighbors = new std::vector<Node*>[5];
-			//node->neighbors->resize(5);
-			node->neighbors->push_back(&nodes[(x - 1) * height]);
-			node->neighbors->push_back(&nodes[(x - 1) * height + 1]);
-			node->neighbors->push_back(&nodes[x * height + 1]);
-			node->neighbors->push_back(&nodes[(x + 1) * height]);
-			node->neighbors->push_back(&nodes[(x + 1) * height + 1]);
+			//node->neighbors[5];
+			//node->neighbors.resize(5);
+			node->neighbors.push_back(&nodes[(x - 1) * height]);
+			node->neighbors.push_back(&nodes[(x - 1) * height + 1]);
+			node->neighbors.push_back(&nodes[x * height + 1]);
+			node->neighbors.push_back(&nodes[(x + 1) * height]);
+			node->neighbors.push_back(&nodes[(x + 1) * height + 1]);
 		}
 	}
 	else if (y == height - 1)
 	{
 		if (x == width - 1)
 		{
-			node->neighbors = new std::vector<Node*>[3];
-			//node->neighbors->resize(3);
-			node->neighbors->push_back(&nodes[(x - 1) * height + y]);
-			node->neighbors->push_back(&nodes[(x - 1) * height + y - 1]);
-			node->neighbors->push_back(&nodes[x * height + y - 1]);
+			//node->neighbors[3];
+			//node->neighbors.resize(3);
+			node->neighbors.push_back(&nodes[(x - 1) * height + y]);
+			node->neighbors.push_back(&nodes[(x - 1) * height + y - 1]);
+			node->neighbors.push_back(&nodes[x * height + y - 1]);
 		}
 		else
 		{
-			node->neighbors = new std::vector<Node*>[5];
-			//node->neighbors->resize(5);
-			node->neighbors->push_back(&nodes[(x - 1) * height + y]);
-			node->neighbors->push_back(&nodes[(x - 1) * height + y - 1]);
-			node->neighbors->push_back(&nodes[x * height + y - 1]);
-			node->neighbors->push_back(&nodes[(x + 1) * height + y]);
-			node->neighbors->push_back(&nodes[(x + 1) * height + y - 1]);
+			//node->neighbors[5];
+			//node->neighbors.resize(5);
+			node->neighbors.push_back(&nodes[(x - 1) * height + y]);
+			node->neighbors.push_back(&nodes[(x - 1) * height + y - 1]);
+			node->neighbors.push_back(&nodes[x * height + y - 1]);
+			node->neighbors.push_back(&nodes[(x + 1) * height + y]);
+			node->neighbors.push_back(&nodes[(x + 1) * height + y - 1]);
 		}
 	}
 	else if (x == width - 1)
 	{
-		node->neighbors = new std::vector<Node*>[5];
-		//node->neighbors->resize(5);
-		node->neighbors->push_back(&nodes[x * height - 1]);
-		node->neighbors->push_back(&nodes[x * height + 1]);
-		node->neighbors->push_back(&nodes[(x - 1) * height - 1]);
-		node->neighbors->push_back(&nodes[(x - 1) * height]);
-		node->neighbors->push_back(&nodes[(x - 1) * height + 1]);
+		//node->neighbors[5];
+		//node->neighbors.resize(5);
+		node->neighbors.push_back(&nodes[x * height - 1]);
+		node->neighbors.push_back(&nodes[x * height + 1]);
+		node->neighbors.push_back(&nodes[(x - 1) * height - 1]);
+		node->neighbors.push_back(&nodes[(x - 1) * height]);
+		node->neighbors.push_back(&nodes[(x - 1) * height + 1]);
 	}
 	else
 	{
-		node->neighbors = new std::vector<Node*>[8];
-		//node->neighbors->resize(8);
-		node->neighbors->push_back(&nodes[(x - 1) * height + y - 1]);
-		node->neighbors->push_back(&nodes[(x - 1) * height + y]);
-		node->neighbors->push_back(&nodes[(x - 1) * height + y + 1]);
-		node->neighbors->push_back(&nodes[x * height + y - 1]);
-		node->neighbors->push_back(&nodes[x * height + y + 1]);
-		node->neighbors->push_back(&nodes[(x + 1) * height + y - 1]);
-		node->neighbors->push_back(&nodes[(x + 1) * height + y]);
-		node->neighbors->push_back(&nodes[(x + 1) * height + y + 1]);
+		//node->neighbors[8];
+		//node->neighbors.resize(8);
+		node->neighbors.push_back(&nodes[(x - 1) * height + y - 1]);
+		node->neighbors.push_back(&nodes[(x - 1) * height + y]);
+		node->neighbors.push_back(&nodes[(x - 1) * height + y + 1]);
+		node->neighbors.push_back(&nodes[x * height + y - 1]);
+		node->neighbors.push_back(&nodes[x * height + y + 1]);
+		node->neighbors.push_back(&nodes[(x + 1) * height + y - 1]);
+		node->neighbors.push_back(&nodes[(x + 1) * height + y]);
+		node->neighbors.push_back(&nodes[(x + 1) * height + y + 1]);
 	}
-	//return &neighbors;
 }
 
 Node* Map::FindNode(sf::Vector2f position)
 {
 	for (size_t i = 0; i < this->nodes.size(); i++)
 	{
-		if (this->nodes[i].x == position.x && this->nodes[i].y == position.y)
-		{
+		// Calculate the distance and compare it with a node's size to see if the position to compare it's inside the node's rectangle
+		if (abs(this->nodes[i].x - position.x) <= MAP_NODE_DIMENSION_X && abs(this->nodes[i].y - position.y) <= MAP_NODE_DIMENSION_Y)
 			return &this->nodes[i];
-			
-		}
 	}
 	return NULL;
 }
