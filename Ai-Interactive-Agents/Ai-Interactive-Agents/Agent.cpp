@@ -2,7 +2,7 @@
 #include "Agent.h"
 
 
-void Agent::MoveTo()
+void Agent::MoveAlongPath()
 {
 	Node* currentPath = path.front();
 
@@ -22,8 +22,6 @@ void Agent::MoveTo()
 	}
 	
 }
-
-
 
 void Agent::SeekFleeBehaviour(sf::Vector2i destination, bool seek)
 {
@@ -87,25 +85,94 @@ sf::Vector2f Agent::lerp(sf::Vector2f start, sf::Vector2f end, float t)
 
 void Agent::RunStateControl()
 {
+	std::cout << "Entering run state" << std::endl;
+	size_t trainingCount = RandomNumberInRange(3, 1);
+	for (size_t i = 0; i < trainingCount; i++)
+	{
+		this->energy -= RandomNumberInRange(15, 5);
+		std::cout << "Training hard!" << std::endl;
+		if (this->energy <= 0)
+		{
+			std::cout << "I don't have enough energy to continue..." << std::endl;
+			this->energy = 0;
+			this->currentState = Default;
+			return;
+		}
+	}
+	this->currentState = Default;
+	std::cout << "Training done!" << std::endl;
 }
 
 void Agent::BenchStateControl()
 {
+	std::cout << "Entering bench press state" << std::endl;
+	size_t trainingCount = RandomNumberInRange(5, 2);
+	for (size_t i = 0; i < trainingCount; i++)
+	{
+		this->energy -= RandomNumberInRange(10, 5);
+		std::cout << "Huh...." << std::endl;
+		if (this->energy <= 0)
+		{
+			std::cout << "I don't have enough energy to continue..." << std::endl;
+			this->energy = 0;
+			this->currentState = Default;
+			return;
+		}
+	}
+	this->currentState = Default;
+	std::cout << "Training done. I feel stronger already!" << std::endl;
 }
 
 void Agent::ElectricBikeStateControl()
 {
+	std::cout << "Started cycling" << std::endl;
+	size_t trainingCount = RandomNumberInRange(7, 4);
+	for (size_t i = 0; i < trainingCount; i++)
+	{
+		this->energy -= RandomNumberInRange(5, 2);
+		if (this->energy <= 0)
+		{
+			std::cout << "I don't have enough energy to continue..." << std::endl;
+			this->energy = 0;
+			this->currentState = Default;
+			return;
+		}
+	}
+	this->currentState = Default;
+	std::cout << "Training done" << std::endl;
 }
 
 void Agent::ChooseTraining()
 {
 	std::cout << "Choose training state" << std::endl;
-	currentState = ChooseTrainingState;
 	//Randomly choose the next training
-	States nextState = (States)RandomNumberInRange(4, 2);
+	this->nextState = (States)RandomNumberInRange(5, 3);
+	sf::Vector2f positionToCompare;
+
+	// Based on the next randomly chosen state get a position for the training area
+	if (this->nextState == RunState)
+		positionToCompare = mapReference->treadMillSprite->getPosition();
+	else if (this->nextState == BenchState)
+		positionToCompare = mapReference->benchSprite->getPosition();
+	else if (this->nextState == ElectricBikeState)
+		positionToCompare == mapReference->bikeSprite->getPosition();
+	else
+		// Error handling
+		std::cout << "ERROR: You got an invalid state from the radom number generator please restart!" << std::endl;
 
 	// Create a function that will return the position of an object in grid space to get the nodes for generating a path
-	path = this->GeneratePath(mapReference->nodes[0], mapReference->nodes[7 * mapReference->width + 5]);
+	if (this->m_sprite.getPosition() == positionToCompare)
+	{
+		// We are already in position to start training
+		this->currentState = this->nextState;
+		this->nextState = Default;
+	}
+	else
+	{
+		path = this->GeneratePath(*mapReference->FindNode(this->m_sprite.getPosition()), *mapReference->FindNode(positionToCompare));
+		this->currentState = Move;
+	}
+	
 	std::cout << "Training chosen" << std::endl;
 }
 
@@ -158,38 +225,60 @@ std::list<Node*> Agent::GeneratePath(Node start, Node end)
 void Agent::RestingState()
 {
 	std::cout << "Entering resting state!" << std::endl;
-	this->energy++;
+	this->energy += 5;
+	this->currentState = Default;
 	std::cout << "Restoring energy..." << std::endl;
 }
 
 int Agent::RandomNumberInRange(int max, int min)
 {
-	srand(time(0));
+	srand(clock());
 	return rand() % (max + 1 - min) + min;
 }
 
 void Agent::Update()
 {
-	// Do I have enough energy?
-	if (energy >= 25)
-		ChooseTraining();
-	else
+	switch (currentState)
 	{
-		this->currentState = Resting;
-		RestingState();
+		case Agent::Default:
+		{
+			// Do I have enough energy?
+			if (energy >= 25)
+				currentState = ChooseTrainingState;
+			else
+				this->currentState = Resting;
+		}
+			break;
+		case Agent::Resting:
+			RestingState();
+			break;
+		case Agent::Move:
+		{
+			std::cout << "Moving towards the goal" << std::endl;
+			// If I arrived at the destination change the state
+			if (path.size() != 0)
+				MoveAlongPath();
+			else
+				this->currentState = this->nextState;
+		}
+			break;
+		case Agent::RunState:
+			RunStateControl();
+			break;
+		case Agent::BenchState:
+			BenchStateControl();
+			break;
+		case Agent::ElectricBikeState:
+			ElectricBikeStateControl();
+			break;
+		case Agent::ChooseTrainingState:
+			ChooseTraining();
+			break;
+		default:
+			break;
 	}
-	// Test Code
-
-	//// Choose a state
-	//if (path.size() == 0)
-	//{
-	//	ChooseTraining();
-	//}
-	//else
-	//{
-	//	// We've got a path so we should move along it
-	//	MoveTo();
-	//}
+	std::cout << "Energy remaining ";
+	std::cout << this->energy << std::endl;
 }
 
 Agent::Agent(sf::Sprite sprite, Map* map)

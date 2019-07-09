@@ -7,7 +7,7 @@
 #include <math.h>
 #include "SFML/System/Clock.hpp"
 
-class Agent : public sf::Transformable
+class Agent
 {
 public:
 	void Update();
@@ -24,19 +24,20 @@ public:
 	};
 
 	States currentState;
+	States nextState;
 	sf::Sprite m_sprite;
 	Agent(sf::Sprite sprite, Map* map);
 	~Agent();
 	sf::Vector2f velocity = sf::Vector2f(0, 0);
 
 private:
-	int energy = 100;
+	int energy = RandomNumberInRange(100, 30);
 	std::list<Node*> path;
 	Map* mapReference;
 
 	void RestingState();
 	void SeekFleeBehaviour(sf::Vector2i destination, bool seek);
-	void MoveTo();
+	void MoveAlongPath();
 	void RunStateControl();
 	void BenchStateControl();
 	void ElectricBikeStateControl();

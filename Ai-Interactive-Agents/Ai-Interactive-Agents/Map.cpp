@@ -4,7 +4,6 @@
 
 Map::Map(int xDimension, int yDimension)
 {
-	//this->nodes = new Node[xDimension * yDimension];
 	this->nodes = std::vector<Node>();
 	this->nodes.resize(xDimension * yDimension);
 	this->width = xDimension;
@@ -17,13 +16,11 @@ Map::Map(int xDimension, int yDimension)
 		{
 			nodes[index].x = i * MAP_NODE_DIMENSION_X;
 			nodes[index].y = j * MAP_NODE_DIMENSION_Y;
-			//nodes[index].neighbors = *FindNeighbors(i, j);
 			FindNeighbors(i, j, &nodes[index], width, height);
-			//std::cout << i << " ";
-			//std::cout << j << std::endl;
 			index++;
 		}
 	}
+	GenerateGym();
 }
 
 void Map::FindNeighbors(int x, int y, Node* node, int width, int height)
@@ -125,6 +122,48 @@ void Map::FindNeighbors(int x, int y, Node* node, int width, int height)
 		node->neighbors->push_back(&nodes[(x + 1) * height + y + 1]);
 	}
 	//return &neighbors;
+}
+
+Node* Map::FindNode(sf::Vector2f position)
+{
+	for (size_t i = 0; i < this->nodes.size(); i++)
+	{
+		if (this->nodes[i].x == position.x && this->nodes[i].y == position.y)
+		{
+			return &this->nodes[i];
+			
+		}
+	}
+	return NULL;
+}
+
+Node* Map::FindNode(float x, float y)
+{
+	return FindNode(sf::Vector2f(x, y));
+}
+
+void Map::GenerateGym()
+{
+	benchTexture;
+	bikeTexture;
+	treadMillTexture;
+
+	// Loading sprites
+	benchTexture.loadFromFile("../Assets/benchpress.png");
+	bikeTexture.loadFromFile("../Assets/bike.png");
+	treadMillTexture.loadFromFile("../Assets/run.png");
+
+	this->benchSprite = new sf::Sprite(benchTexture);
+	this->bikeSprite = new sf::Sprite(bikeTexture);
+	this->treadMillSprite = new sf::Sprite(treadMillTexture);
+
+	this->benchSprite->setPosition(sf::Vector2f(this->nodes[7 * this->width + 6].x, this->nodes[7 * this->width + 6].y));
+	this->bikeSprite->setPosition(sf::Vector2f(this->nodes[12 * this->width + 2].x, this->nodes[12 * this->width + 2].y));
+	this->treadMillSprite->setPosition(sf::Vector2f(this->nodes[17 * this->width + 15].x, this->nodes[17 * this->width + 15].y));
+
+	this->nodes[7 * this->width + 6].isObstacle = true;
+	this->nodes[12 * this->width + 2].isObstacle = true;
+	this->nodes[17 * this->width + 15].isObstacle = true;
 }
 
 Map::~Map()
