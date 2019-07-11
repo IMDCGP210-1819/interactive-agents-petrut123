@@ -23,61 +23,6 @@ void Agent::MoveAlongPath()
 	
 }
 
-void Agent::SeekFleeBehaviour(sf::Vector2i destination, bool seek)
-{
-	//Pass true for seek and false for flee behaviour
-	float maxSpeed = 0.04f;
-	sf::Vector2f desiredVelocity;
-	sf::Vector2f steeringVector;
-
-	if (seek)
-	{
-		desiredVelocity.x = destination.x - this->m_sprite.getPosition().x;
-		desiredVelocity.y = destination.y - this->m_sprite.getPosition().y;
-	}
-	else
-	{
-		desiredVelocity.x = this->m_sprite.getPosition().x - destination.x;
-		desiredVelocity.y = this->m_sprite.getPosition().y - destination.y;
-	}
-
-
-	//Normalization
-	desiredVelocity = desiredVelocity / std::sqrt(desiredVelocity.x * desiredVelocity.x + desiredVelocity.y * desiredVelocity.y);
-	desiredVelocity *= maxSpeed;
-
-	steeringVector = desiredVelocity - velocity;
-
-	velocity += steeringVector;
-
-	//Normalization
-	velocity = velocity / std::sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y));
-	velocity *= maxSpeed;
-
-	float angle = atan2(velocity.y, velocity.x);
-	this->m_sprite.setRotation(angle * 180.0 / M_PI);
-
-	this->m_sprite.move(velocity);
-
-	if (this->m_sprite.getPosition().x <= 0)
-	{
-		this->m_sprite.setPosition(sf::Vector2f(MAP_NODE_DIMENSION_X, this->m_sprite.getPosition().y));
-	}
-	else if (this->m_sprite.getPosition().x >= MAP_NODE_DIMENSION_X)
-	{
-		this->m_sprite.setPosition(sf::Vector2f(0.0f, this->m_sprite.getPosition().y));
-	}
-
-	if (this->m_sprite.getPosition().y <= 0)
-	{
-		this->m_sprite.setPosition(sf::Vector2f(this->m_sprite.getPosition().x, MAP_NODE_DIMENSION_Y));
-	}
-	else if (this->m_sprite.getPosition().y >= MAP_NODE_DIMENSION_Y)
-	{
-		this->m_sprite.setPosition(sf::Vector2f(this->m_sprite.getPosition().x, 0.0f));
-	}
-}
-
 sf::Vector2f Agent::lerp(sf::Vector2f start, sf::Vector2f end, float t)
 {
 	return (1 - t) * start + t * end;
@@ -94,10 +39,10 @@ void Agent::Delay(float delayTimeInSeconds)
 void Agent::RunStateControl()
 {
 	std::cout << "Entering run state" << std::endl;
-	size_t trainingCount = RandomNumberInRange(3, 1);
+	size_t trainingCount = Random::RandomNumberInRange(3, 1);
 	for (size_t i = 0; i < trainingCount; i++)
 	{
-		this->energy -= RandomNumberInRange(15, 5);
+		this->energy -= Random::RandomNumberInRange(15, 5);
 		std::cout << "Training hard!" << std::endl;
 		if (this->energy <= 0)
 		{
@@ -115,10 +60,10 @@ void Agent::RunStateControl()
 void Agent::BenchStateControl()
 {
 	std::cout << "Entering bench press state" << std::endl;
-	size_t trainingCount = RandomNumberInRange(5, 2);
+	size_t trainingCount = Random::RandomNumberInRange(5, 2);
 	for (size_t i = 0; i < trainingCount; i++)
 	{
-		this->energy -= RandomNumberInRange(10, 5);
+		this->energy -= Random::RandomNumberInRange(10, 5);
 		std::cout << "Huh...." << std::endl;
 		if (this->energy <= 0)
 		{
@@ -136,10 +81,10 @@ void Agent::BenchStateControl()
 void Agent::ElectricBikeStateControl()
 {
 	std::cout << "Started cycling" << std::endl;
-	size_t trainingCount = RandomNumberInRange(7, 4);
+	size_t trainingCount = Random::RandomNumberInRange(7, 4);
 	for (size_t i = 0; i < trainingCount; i++)
 	{
-		this->energy -= RandomNumberInRange(5, 2);
+		this->energy -= Random::RandomNumberInRange(5, 2);
 		if (this->energy <= 0)
 		{
 			std::cout << "I don't have enough energy to continue..." << std::endl;
@@ -157,7 +102,7 @@ void Agent::ChooseTraining()
 {
 	std::cout << "Choose training state" << std::endl;
 	//Randomly choose the next training
-	this->nextState = (States)RandomNumberInRange(5, 3);
+	this->nextState = (States)Random::RandomNumberInRange(5, 3);
 	sf::Vector2f positionToCompare;
 
 	// Based on the next randomly chosen state get a position for the training area
@@ -221,14 +166,9 @@ std::list<Node*> Agent::GeneratePath(Node start, Node end)
 void Agent::RestingState()
 {
 	std::cout << "Entering resting state!" << std::endl;
-	this->energy += RandomNumberInRange(15, 5);
+	this->energy += Random::RandomNumberInRange(15, 5);
 	this->currentState = Default;
 	std::cout << "Restoring energy..." << std::endl;
-}
-
-int Agent::RandomNumberInRange(int max, int min)
-{
-	return rand() % (max + 1 - min) + min;
 }
 
 void Agent::Update()
@@ -278,7 +218,6 @@ void Agent::Update()
 
 Agent::Agent(sf::Sprite sprite, Map* map)
 {
-	srand(time(0));
 	this->m_sprite = sprite;
 	this->mapReference = map;
 	//Go into default state
