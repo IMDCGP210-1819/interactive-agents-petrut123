@@ -36,6 +36,39 @@ void Agent::Delay(float delayTimeInSeconds)
 		time += clock.restart();
 }
 
+std::string Agent::ConvertStateToString(States state)
+{
+	std::string stringToReturn;
+	switch (state)
+	{
+	case Agent::Default:
+		stringToReturn = "Default State!";
+		break;
+	case Agent::Resting:
+		stringToReturn = "Resting State!";
+		break;
+	case Agent::Move:
+		stringToReturn = "Moving State!";
+		break;
+	case Agent::RunState:
+		stringToReturn = "Running on the treadmill!";
+		break;
+	case Agent::BenchState:
+		stringToReturn = "Weight lifting State!";
+		break;
+	case Agent::ElectricBikeState:
+		stringToReturn = "Cycling on the electric bike!";
+		break;
+	case Agent::ChooseTrainingState:
+		stringToReturn = "Choose Training State!";
+		break;
+	default:
+		break;
+	}
+
+	return stringToReturn;
+}
+
 void Agent::RunStateControl()
 {
 	//std::cout << "Entering run state" << std::endl;
@@ -221,13 +254,25 @@ void Agent::Update()
 		default:
 			break;
 	}
-	//std::cout << "Energy remaining ";
-	//std::cout << this->energy << std::endl;
+
+	if (selected)
+	{
+		std::cout << "Energy remaining " << this->energy << std::endl;
+		std::cout << "Current state: " << ConvertStateToString(this->currentState) << std::endl;
+		if (currentState == Move)
+			std::cout << "Moving towards the place for my next state: " << ConvertStateToString(this->nextState) << std::endl;
+		std::cout << "___________________________________________________" << std::endl;
+		std::cout<<std::endl;
+	}
 }
 
 void Agent::OnAgentClicked()
 {
-	std::cout << "Agent clicked!" << std::endl;
+	selected = !selected;
+	if (selected)
+		std::cout << "Agent selected! " << std::endl;
+	else
+		std::cout << "Agent deselected! " << std::endl;
 }
 
 void Agent::RestoreEnergy(int energy)

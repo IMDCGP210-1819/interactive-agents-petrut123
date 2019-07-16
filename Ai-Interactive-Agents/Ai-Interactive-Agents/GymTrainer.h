@@ -17,6 +17,7 @@ public:
 	sf::Sprite m_sprite;
 private:
 	bool personChosen = false;
+	bool selected = false;
 	int chosenAgentIndex;
 	std::vector<Agent*> agentsReferences;
 	sf::Vector2i targetPosition = sf::Vector2i(0, 0);

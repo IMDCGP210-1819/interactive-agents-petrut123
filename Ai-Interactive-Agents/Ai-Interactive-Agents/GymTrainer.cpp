@@ -25,7 +25,10 @@ void GymTrainer::Update()
 		{
 			this->agentsReferences[chosenAgentIndex]->RestoreEnergy(15);
 			personChosen = false;
-			//std::cout << "Restored Energy to Agent" << std::endl;
+
+			if (selected)
+				std::cout << "Restored Energy to Agent" << std::endl;
+
 			// Choose a new target position
 			this->targetPosition = sf::Vector2i(Random::RandomNumberInRange(1200, 0), Random::RandomNumberInRange(600, 0));
 		}
@@ -42,11 +45,23 @@ void GymTrainer::Update()
 				personChosen = true;
 		}
 	}
+
+	if (selected)
+	{
+		if (personChosen)
+			std::cout << "Going towards an Agent to restore it's energy " << std::endl;
+		else
+			std::cout << "Moving in the Gym " << std::endl;
+	}
 }
 
 void GymTrainer::OnClick()
 {
-	std::cout << "Clicked on trainer " << std::endl;
+	selected = !selected;
+	if (selected)
+		std::cout << "Trainer selected " << std::endl;
+	else
+		std::cout << "Trainer deselected " << std::endl;
 }
 
 // Pass true for seek and false for flee behaviour

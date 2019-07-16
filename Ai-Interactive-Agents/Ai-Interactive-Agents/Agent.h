@@ -30,6 +30,7 @@ public:
 
 private:
 	int energy = 100;
+	bool selected = false;
 	std::list<Node*> path;
 	Map* mapReference;
 
@@ -42,5 +43,7 @@ private:
 	std::list<Node*> GeneratePath(Node start, Node end);
 	sf::Vector2f lerp(sf::Vector2f start, sf::Vector2f end, float t);
 	void Delay(float delayTimeInSeconds);
+
+	std::string ConvertStateToString(States state);
 };
 
