@@ -10,7 +10,7 @@ class Agent
 {
 public:
 	void Update();
-
+	void OnAgentClicked();
 	enum States
 	{
 		Default,
@@ -21,7 +21,7 @@ public:
 		ElectricBikeState,
 		ChooseTrainingState
 	};
-
+	void RestoreEnergy(int energy);
 	States currentState;
 	States nextState;
 	sf::Sprite m_sprite;
@@ -29,7 +29,7 @@ public:
 	~Agent();
 
 private:
-	int energy = Random::RandomNumberInRange(100, 30);
+	int energy = 100;
 	std::list<Node*> path;
 	Map* mapReference;
 

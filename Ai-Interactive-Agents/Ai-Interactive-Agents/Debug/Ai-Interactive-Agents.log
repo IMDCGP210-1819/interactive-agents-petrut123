@@ -1,6 +1,43 @@
 ﻿  Ai-Interactive-Agents.cpp
-  GymTrainer.cpp
 E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Random.h(10,2): warning C4091:  'static ': ignored on left of 'Random' when no variable is declared
-  Generating Code...
-E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Random.h(10,2): warning C4091:  'static ': ignored on left of 'Random' when no variable is declared
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(48,77): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(48,126): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(48,110): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(48,62): warning C4244:  'argument': conversion from 'int' to 'float', possible loss of data
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,69): warning C4244:  'argument': conversion from 'T' to 'T', possible loss of data
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,69): warning C4244:         with
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,69): warning C4244:         [
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,69): warning C4244:             T=int
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,69): warning C4244:         ]
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,69): warning C4244:         and
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,69): warning C4244:         [
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,69): warning C4244:             T=float
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,69): warning C4244:         ]
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,60): warning C4244:  'argument': conversion from 'T' to 'T', possible loss of data
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,60): warning C4244:         with
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,60): warning C4244:         [
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,60): warning C4244:             T=int
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,60): warning C4244:         ]
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,60): warning C4244:         and
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,60): warning C4244:         [
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,60): warning C4244:             T=float
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(78,60): warning C4244:         ]
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,41): warning C4244:  'argument': conversion from 'T' to 'T', possible loss of data
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,41): warning C4244:         with
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,41): warning C4244:         [
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,41): warning C4244:             T=int
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,41): warning C4244:         ]
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,41): warning C4244:         and
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,41): warning C4244:         [
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,41): warning C4244:             T=float
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,41): warning C4244:         ]
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,32): warning C4244:  'argument': conversion from 'T' to 'T', possible loss of data
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,32): warning C4244:         with
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,32): warning C4244:         [
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,32): warning C4244:             T=int
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,32): warning C4244:         ]
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,32): warning C4244:         and
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,32): warning C4244:         [
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,32): warning C4244:             T=float
+E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Ai-Interactive-Agents\Ai-Interactive-Agents.cpp(87,32): warning C4244:         ]
   Ai-Interactive-Agents.vcxproj -> E:\AI-Interactive\interactive-agents-petrut123\interactive-agents-petrut123\Ai-Interactive-Agents\Debug\Ai-Interactive-Agents.exe

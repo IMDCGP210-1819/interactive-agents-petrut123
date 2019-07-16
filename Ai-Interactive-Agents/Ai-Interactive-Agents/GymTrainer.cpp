@@ -3,29 +3,57 @@
 
 
 
-GymTrainer::GymTrainer(sf::Sprite sprite)
+GymTrainer::GymTrainer(sf::Sprite sprite, std::vector<Agent*> agents)
 {
 	this->m_sprite = sprite;
 	this->targetPosition = sf::Vector2i(Random::RandomNumberInRange(1200, 0), Random::RandomNumberInRange(600, 0));
+	this->agentsReferences = agents;
 }
 
 void GymTrainer::Update()
 {
 	SeekFleeBehaviour(targetPosition, true);
+	
 
-	// Check if the gym trainer got to it's destination
-	if (abs(this->m_sprite.getPosition().x - this->targetPosition.x) < 1 && abs(this->m_sprite.getPosition().y - this->targetPosition.y) < 1)
+	if (personChosen)
 	{
-		this->targetPosition = sf::Vector2i(Random::RandomNumberInRange(1200, 0), Random::RandomNumberInRange(600, 0));
-		std::cout << "Destination Reached" << std::endl;
+		this->chosenAgentIndex = Random::RandomNumberInRange(agentsReferences.size() - 1, 0);
+		this->targetPosition = (sf::Vector2i)agentsReferences[this->chosenAgentIndex]->m_sprite.getPosition();
+		//std::cout << "Chose an agent to restore energy " << std::endl;
+
+		if (abs(this->m_sprite.getPosition().x - this->targetPosition.x) < 1 && abs(this->m_sprite.getPosition().y - this->targetPosition.y) < 1)
+		{
+			this->agentsReferences[chosenAgentIndex]->RestoreEnergy(15);
+			personChosen = false;
+			//std::cout << "Restored Energy to Agent" << std::endl;
+			// Choose a new target position
+			this->targetPosition = sf::Vector2i(Random::RandomNumberInRange(1200, 0), Random::RandomNumberInRange(600, 0));
+		}
 	}
+	else
+	{
+		// Check if the gym trainer got to it's destination
+		if (abs(this->m_sprite.getPosition().x - this->targetPosition.x) < 1 && abs(this->m_sprite.getPosition().y - this->targetPosition.y) < 1)
+		{
+			this->targetPosition = sf::Vector2i(Random::RandomNumberInRange(1200, 0), Random::RandomNumberInRange(600, 0));
+			//std::cout << "Destination Reached" << std::endl;
+
+			if (Random::RandomNumberInRange(100, 0) <= 30)
+				personChosen = true;
+		}
+	}
+}
+
+void GymTrainer::OnClick()
+{
+	std::cout << "Clicked on trainer " << std::endl;
 }
 
 // Pass true for seek and false for flee behaviour
 void GymTrainer::SeekFleeBehaviour(sf::Vector2i destination, bool seek)
 {
 	
-	float maxSpeed = 2.f;
+	float maxSpeed = 1.f;
 	sf::Vector2f desiredVelocity;
 	sf::Vector2f steeringVector;
 
@@ -57,22 +85,4 @@ void GymTrainer::SeekFleeBehaviour(sf::Vector2i destination, bool seek)
 	//this->m_sprite.setRotation(angle * 180.0 / M_PI);
 
 	this->m_sprite.move(velocity);
-
-	/*if (this->m_sprite.getPosition().x <= 0)
-	{
-		this->m_sprite.setPosition(sf::Vector2f(MAP_NODE_DIMENSION_X, this->m_sprite.getPosition().y));
-	}
-	else if (this->m_sprite.getPosition().x >= MAP_NODE_DIMENSION_X)
-	{
-		this->m_sprite.setPosition(sf::Vector2f(0.0f, this->m_sprite.getPosition().y));
-	}
-
-	if (this->m_sprite.getPosition().y <= 0)
-	{
-		this->m_sprite.setPosition(sf::Vector2f(this->m_sprite.getPosition().x, MAP_NODE_DIMENSION_Y));
-	}
-	else if (this->m_sprite.getPosition().y >= MAP_NODE_DIMENSION_Y)
-	{
-		this->m_sprite.setPosition(sf::Vector2f(this->m_sprite.getPosition().x, 0.0f));
-	}*/
 }
